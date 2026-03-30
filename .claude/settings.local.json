@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pdftotext /home/gaperton/Logic/Logika_Uchebnik_dlya_sredney_shkoly-Vinogradov-1954.pdf -)",
+      "Bash(python3:*)"
+    ]
+  }
+}
