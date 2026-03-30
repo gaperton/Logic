@@ -7,11 +7,11 @@ import sys
 from pathlib import Path
 
 try:
-    import markdown
+    import markdown2
 except ImportError:
-    print("Installing markdown library...")
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "markdown"])
-    import markdown
+    print("Installing markdown2 library...")
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "markdown2"])
+    import markdown2
 
 REPO_ROOT = Path(__file__).parent
 SOURCE_DIR = REPO_ROOT / "chapters_human_edited"
@@ -291,10 +291,8 @@ def build():
             "text": text,
         })
 
-    md = markdown.Markdown(extensions=["tables", "fenced_code"])
-
     for i, ch in enumerate(chapters):
-        md.reset()
+        md = markdown2.Markdown(extras=["tables", "fenced-code-blocks", "strike"])
         content_html = md.convert(ch["text"])
 
         prev_link = (
