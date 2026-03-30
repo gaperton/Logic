@@ -266,11 +266,19 @@ def build():
         shutil.rmtree(SITE_DIR)
     SITE_DIR.mkdir()
 
-    # Copy images
+    # Copy images (including those in chapter subdirectories)
     for img in SOURCE_DIR.glob("*.png"):
         shutil.copy(img, SITE_DIR / img.name)
     for img in SOURCE_DIR.glob("*.jpg"):
         shutil.copy(img, SITE_DIR / img.name)
+    # Copy images from chapter subdirectories
+    for chapter_dir in SOURCE_DIR.iterdir():
+        if chapter_dir.is_dir():
+            chapter_img_dir = SITE_DIR / chapter_dir.name
+            chapter_img_dir.mkdir(exist_ok=True)
+            for img in chapter_dir.glob("*"):
+                if img.is_file() and (img.suffix.lower() in [".png", ".jpg", ".jpeg", ".gif", ".svg"]):
+                    shutil.copy(img, chapter_img_dir / img.name)
 
     chapter_files = get_chapter_files()
     chapters = []
