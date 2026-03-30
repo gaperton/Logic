@@ -1,0 +1,1 @@
+Here is an AI edited markdown version of the original book, with paragraphs restored and garbage removed.

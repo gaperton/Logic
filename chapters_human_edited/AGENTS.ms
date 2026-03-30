@@ -1,0 +1,1 @@
+Here is a human edited markdown version of the original book, with images embedded.
