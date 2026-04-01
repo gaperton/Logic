@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Предисловие редактора — Логика</title>
+  <style>
+:root {
+  --text: #1a1a1a;
+  --bg: #faf8f3;
+  --bg-nav: #2c2c2c;
+  --accent: #8b1a1a;
+  --border: #d4c9b0;
+  --link: #5c3317;
+  --max-width: 720px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 18px;
+  line-height: 1.75;
+  color: var(--text);
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+nav {
+  background: var(--bg-nav);
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+nav a {
+  color: #e0d8c8;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-family: sans-serif;
+  white-space: nowrap;
+}
+
+nav a:hover { color: #fff; text-decoration: underline; }
+
+nav .spacer { flex: 1; }
+
+nav .chapter-nav { display: flex; gap: 1rem; }
+
+main {
+  flex: 1;
+  max-width: var(--max-width);
+  width: 100%;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 5rem;
+}
+
+.book-header {
+  text-align: center;
+  padding: 4rem 0 3rem;
+  border-bottom: 2px solid var(--border);
+  margin-bottom: 3rem;
+}
+
+.book-header h1 {
+  font-size: 3rem;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.book-header .subtitle {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 0.3rem;
+}
+
+.book-header .authors {
+  font-style: italic;
+  color: #777;
+  font-size: 0.95rem;
+}
+
+.toc h2 {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #666;
+  margin-bottom: 1.5rem;
+  font-family: sans-serif;
+  font-weight: 400;
+}
+
+.toc ol { list-style: none; }
+
+.toc li { border-bottom: 1px solid var(--border); }
+
+.toc li a {
+  display: block;
+  padding: 0.75rem 0;
+  color: var(--link);
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.toc li a:hover {
+  color: var(--accent);
+  padding-left: 0.5rem;
+  transition: padding 0.15s;
+}
+
+h1 { font-size: 1.8rem; color: var(--accent); margin-bottom: 2rem; line-height: 1.3; }
+
+h2 { font-size: 1.35rem; margin: 2.5rem 0 1rem; }
+
+h3 {
+  font-size: 1.1rem;
+  font-style: italic;
+  font-weight: normal;
+  margin: 2rem 0 0.75rem;
+  color: #333;
+}
+
+p { margin-bottom: 1.1rem; text-align: justify; }
+
+blockquote {
+  border-left: 3px solid var(--border);
+  margin: 1.5rem 0;
+  padding: 0.5rem 1.25rem;
+  color: #444;
+  font-style: italic;
+}
+
+img { max-width: 100%; display: block; margin: 1.5rem auto; }
+
+strong { color: #111; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+th, td {
+  border: 1px solid var(--border);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+
+th { background: #ede8dc; }
+
+footer {
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.8rem;
+  color: #888;
+  font-family: sans-serif;
+  border-top: 1px solid var(--border);
+}
+
+@media (max-width: 600px) {
+  body { font-size: 16px; }
+  .book-header h1 { font-size: 2.2rem; }
+  main { padding: 2rem 1rem 4rem; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html">&#8962; Оглавление</a>
+  <span class="spacer"></span>
+  <div class="chapter-nav">
+    
+    <a href="01_glava_I.html">Глава I. ПРЕДМЕТ И ЗАДАЧИ НАУКИ ЛОГИКИ &#8594;</a>
+  </div>
+</nav>
+<main>
+<h1>Предисловие редактора</h1>
+
+<p>Традиция, которой принадлежит этот учебник, восходит к «Органону» Аристотеля (IV в. до н. э.) — корпусу трактатов о понятии, суждении, силлогизме и доказательстве. Через средневековую схоластику, где логика составляла основу университетского образования, эта традиция перешла в европейские учебники Нового времени и без принципиальных изменений дожила до середины XX века. Виноградов и Кузьмин работают именно в ней: те же правила определения и деления понятий, те же фигуры силлогизма, та же теория доказательства, что и у Аристотеля.</p>
+
+<p>В XIX–XX веках Фреге, Рассел и Гильберт создали символическую логику — формальный язык для строгой проверки выводов. Это мощный инструмент, но решающий узкую задачу: он отвечает на вопрос «следует ли вывод из посылок?», предполагая, что посылки уже сформулированы точно. Именно это допущение оставляет за кадром самую трудную часть живого рассуждения.</p>
+
+<p>Когда человек рассуждает на естественном языке, главные ошибки случаются раньше: понятия путаются, тезис подменяется, аргумент разваливается ещё до всякой формализации. Традиционная логика работает на этом уровне — учит различать смыслы, правильно определять и делить понятия, строить и проверять аргумент внутри языка. Поэтому для того, кто хочет лучше думать и говорить, а не верифицировать формулы, старый учебник оказывается ближе к задаче, чем новый.</p>
+
+<p>Настоящее издание воспроизводит текст учебника логики И. Н. Виноградова и А. П. Кузьмина 1954 года, оцифрованного из оригинального PDF. Текст адаптирован для современного читателя: исправлены артефакты распознавания, унифицирована разметка, обновлены отдельные устаревшие обороты и орфография в соответствии с современными нормами русского языка.</p>
+
+<p>Учебник создавался в конкретную историческую эпоху, и ряд примеров и формулировок несёт следы советской идеологии, не имеющей отношения к содержанию логики как науки. Такие фрагменты опираются на реальность, малопонятную современному читателю, и заменены нейтральными аналогами. В частности:</p>
+
+<ul>
+<li>советские термины в упражнениях («комсомольцы», «колхозники», «совхоз», «пролетариат», «Дворец Советов» и др.) заменены общеупотребительными понятиями;</li>
+<li>идеологически нагруженные цитаты (Энгельс о материализме, советские законодательные формулировки) заменены нейтральными суждениями с аналогичной логической структурой;</li>
+<li>примеры силлогизмов, в которых логическая форма использовалась для пропаганды, заменены примерами из естественных наук и повседневной жизни.</li>
+</ul>
+
+<p>Логическое содержание всех глав и упражнений сохранено без изменений.</p>
+
+<hr />
+
+<p><em>Редакторы: Влад Балин (@gaperton), Юрий Шелях (@drcha0s)</em></p>
+
+</main>
+<footer>И. Н. Виноградов, А. П. Кузьмин, 1954. Учебник для средней школы.</footer>
+</body>
+</html>
