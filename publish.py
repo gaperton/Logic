@@ -323,16 +323,62 @@ footer {
   nav .chapter-nav a { max-width: 18ch; }
 }
 
-/* ─── Print ──────────────────────────────────────────────── */
+/* ─── Print all (print.html only) ───────────────────────── */
+article + article { break-before: page; }
+
+/* ─── Print button ───────────────────────────────────────── */
+.print-btn {
+  display: flex;
+  align-items: center;
+  color: #b8b0a0;
+  opacity: 0.55;
+  padding: 0.3rem;
+  border-radius: 3px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  transition: opacity 0.15s, background 0.15s;
+}
+
+.print-btn:hover { opacity: 1; background: rgba(255,255,255,0.1); }
+
+/* ─── Print / PDF export ─────────────────────────────────── */
 @media print {
-  nav, footer, body::before { display: none; }
-  main { padding: 0; }
-  h1 { color: #000; border: none; }
+  @page { margin: 2cm 2.5cm; }
+
+  nav, footer, body::before, .print-btn, .github-link { display: none !important; }
+
+  body { font-size: 13pt; line-height: 1.7; background: #fff; color: #000; }
+  main { padding: 0; max-width: 100%; }
+
+  h1 {
+    color: #000;
+    border-bottom: 1px solid #999;
+    font-size: 16pt;
+    page-break-after: avoid;
+  }
+
+  h2 { color: #000; font-size: 9pt; page-break-after: avoid; }
+  h3 { color: #000; page-break-after: avoid; }
+
+  p { orphans: 3; widows: 3; }
+
+  blockquote {
+    border-left: 1px solid #999;
+    background: none;
+    page-break-inside: avoid;
+  }
+
+  img { page-break-inside: avoid; max-width: 100%; }
+  table { page-break-inside: avoid; }
+
   a { color: #000; text-decoration: none; }
 }
 """
 
 GITHUB_ICON = '<a href="https://github.com/gaperton/Logic" class="github-link" title="GitHub" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>'
+
+DOWNLOAD_BTN = '<a href="logika.pdf" download class="print-btn">Скачать PDF</a>'
 
 NAV_TEMPLATE = """\
 <nav>
@@ -342,6 +388,7 @@ NAV_TEMPLATE = """\
     {prev_link}
     {next_link}
   </div>
+  """ + DOWNLOAD_BTN + """
   """ + GITHUB_ICON + """
 </nav>"""
 
@@ -376,6 +423,7 @@ INDEX_TEMPLATE = """\
 <nav>
   <a href="index.html">&#8962; Оглавление</a>
   <span class="spacer"></span>
+  {download_btn}
   {github_icon}
 </nav>
 <main>
@@ -396,6 +444,128 @@ INDEX_TEMPLATE = """\
   </div>
 </main>
 <footer>Публичное достояние.</footer>
+</body>
+</html>"""
+
+
+PRINT_TEMPLATE = """\
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{book_title} — полный текст</title>
+  <style>
+{css}
+
+/* ─── Cover page ─────────────────────────────────────────── */
+.cover {{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  height: calc(297mm - 5cm);
+  padding: 2cm 1cm;
+  break-after: page;
+  page-break-after: always;
+  box-sizing: border-box;
+}}
+
+.cover-rule {{
+  width: 100%;
+  border: none;
+  border-top: 2px solid #1a1a1a;
+  margin: 0;
+}}
+
+.cover-body {{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5cm;
+}}
+
+.cover-title {{
+  font-family: "Georgia", serif;
+  font-size: 52pt;
+  font-weight: normal;
+  color: #8b1a1a;
+  letter-spacing: 0.08em;
+  margin: 0;
+  line-height: 1;
+}}
+
+.cover-subtitle {{
+  font-family: "Georgia", serif;
+  font-size: 14pt;
+  color: #444;
+  letter-spacing: 0.04em;
+  margin: 0.3cm 0 0;
+}}
+
+.cover-authors {{
+  font-family: "Georgia", serif;
+  font-style: italic;
+  font-size: 12pt;
+  color: #555;
+  margin: 0.2cm 0 0;
+}}
+
+.cover-footer {{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2cm;
+  padding-top: 0.5cm;
+}}
+
+.cover-edition {{
+  font-family: sans-serif;
+  font-size: 8pt;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #888;
+  margin: 0;
+}}
+
+.cover-editors {{
+  font-family: "Georgia", serif;
+  font-style: italic;
+  font-size: 10pt;
+  color: #999;
+  margin: 0;
+}}
+
+.cover p {{ text-align: center; text-indent: 0; }}
+  </style>
+</head>
+<body>
+<nav>
+  <a href="index.html">&#8962; Оглавление</a>
+  <span class="spacer"></span>
+  {download_btn}
+  {github_icon}
+</nav>
+<main>
+<div class="cover">
+  <hr class="cover-rule">
+  <div class="cover-body">
+    <h1 class="cover-title">{book_title}</h1>
+    <p class="cover-subtitle">{book_subtitle}</p>
+    <p class="cover-authors">{book_authors}, {book_year}</p>
+  </div>
+  <div class="cover-footer">
+    <p class="cover-edition">Редактированное издание</p>
+    <p class="cover-editors">ред. В. Балин, Ю. Шелях, 2026</p>
+  </div>
+  <hr class="cover-rule">
+</div>
+{chapters}
+</main>
+<footer>{book_authors}, {book_year}. Учебник для средней школы.</footer>
 </body>
 </html>"""
 
@@ -479,10 +649,51 @@ def build():
         css=CSS,
         toc_items=toc_items,
         github_icon=GITHUB_ICON,
+        download_btn=DOWNLOAD_BTN,
     )
     (SITE_DIR / "index.html").write_text(index, encoding="utf-8")
+
+    # Build print.html — all chapters concatenated for whole-book PDF export
+    all_chapters_html = "\n".join(
+        f'<article>\n{markdown2.Markdown(extras=["tables", "fenced-code-blocks", "strike"]).convert(ch["text"])}\n</article>'
+        for ch in chapters
+    )
+    print_page = PRINT_TEMPLATE.format(
+        book_title=BOOK_TITLE,
+        book_subtitle=BOOK_SUBTITLE,
+        book_authors=BOOK_AUTHORS,
+        book_year=BOOK_YEAR,
+        css=CSS,
+        chapters=all_chapters_html,
+        download_btn=DOWNLOAD_BTN,
+        github_icon=GITHUB_ICON,
+    )
+    (SITE_DIR / "print.html").write_text(print_page, encoding="utf-8")
+    print(f"  print.html")
+
     # GitHub Pages needs this when not using Jekyll
     (SITE_DIR / ".nojekyll").touch()
+
+    # Generate PDF using Playwright
+    print("\nGenerating PDF...")
+    try:
+        from playwright.sync_api import sync_playwright
+        print_html_path = (SITE_DIR / "print.html").resolve()
+        pdf_path = SITE_DIR / "logika.pdf"
+        with sync_playwright() as p:
+            browser = p.chromium.launch()
+            page = browser.new_page()
+            page.goto(f"file://{print_html_path}", wait_until="networkidle")
+            page.pdf(
+                path=str(pdf_path),
+                format="A4",
+                margin={"top": "2.5cm", "bottom": "2.5cm", "left": "2.5cm", "right": "2cm"},
+                print_background=True,
+            )
+            browser.close()
+        print(f"  logika.pdf ({pdf_path.stat().st_size // 1024} KB)")
+    except Exception as e:
+        print(f"  PDF generation failed: {e}")
 
     print(f"\nBuilt {len(chapters)} chapters → {SITE_DIR}/")
     print(f"Preview: open {SITE_DIR / 'index.html'}")
