@@ -1,25 +1,17 @@
 # Logic
 
-**Логика: Учебник для средней школы** (1954) — public domain textbook by I. N. Vinogradov and A. P. Kuzmin, digitized and converted to web format.
-
-## Overview
-
-This project digitizes a classic Russian logic textbook from 1954, converting it from PDF to structured Markdown chapters, then publishing as a static website via GitHub Pages.
+**Логика: Учебник для средней школы** (1954) — public domain textbook by I. N. Vinogradov and A. P. Kuzmin, digitized and published as a static website via GitHub Pages.
 
 ## Project Structure
 
 ```
 Logic/
-├── README.md                      # This file
-├── convert.py                     # PDF → Markdown converter
-├── publish.py                     # Markdown → HTML publisher
-├── Logika_Uchebnik_dlya_sredney_shkoly-Vinogradov-1954.pdf
-├── chapters/                      # Auto-generated Markdown from PDF
-│   ├── 01_glava_I.md
-│   ├── 02_glava_II.md
-│   └── ...
-├── chapters_human_edited/         # Manually edited chapters (source for publishing)
-└── docs/                          # Generated HTML site (GitHub Pages)
+├── convert.py                 # PDF → Markdown converter
+├── publish.py                 # Markdown → HTML publisher
+├── chapters/                  # Auto-generated Markdown from PDF
+├── chapters_ai_edited/        # AI-assisted edits
+├── chapters_human_edited/     # Final manually edited chapters (source for publishing)
+└── docs/                      # Generated HTML site (GitHub Pages)
 ```
 
 ## Workflow
@@ -27,66 +19,53 @@ Logic/
 ### 1. Convert PDF to Markdown
 
 ```bash
-python convert.py
+python3 convert.py
 ```
 
-This script:
-- Extracts text from the PDF using `pdftotext`
-- Detects chapter boundaries (Глава I-XII)
-- Cleans formatting artifacts (page numbers, footnote markers, hyphenation)
-- Applies Markdown structure (headings, paragraphs)
-- Outputs one `.md` file per chapter to `chapters/`
+Extracts text via `pdftotext`, detects chapter boundaries, strips page numbers and footnote markers, joins hyphenated line breaks, and outputs one `.md` file per chapter to `chapters/`.
 
-**Dependencies:** `pdftotext` (from poppler-utils)
+**Requires:** `pdftotext` (poppler-utils)
 
-### 2. Edit Chapters
+### 2. Edit chapters
 
-Review and manually edit the generated Markdown files in `chapters/`, then move corrected versions to `chapters_human_edited/`:
+Review and edit generated files, then place corrected versions in `chapters_human_edited/`. That directory is the source for publishing.
+
+### 3. Build the site
 
 ```bash
-mv chapters/01_glava_I.md chapters_human_edited/
+python3 publish.py
 ```
 
-### 3. Publish to HTML
+Converts Markdown to HTML using `markdown2`, generates navigation, and writes to `docs/`.
+
+**Requires:** `markdown2` (auto-installed if missing)
+
+### 4. Preview locally
 
 ```bash
-python publish.py
+python3 -m http.server 8000 --directory docs
 ```
 
-This script:
-- Converts Markdown chapters to HTML using Python-Markdown
-- Generates a responsive single-page website with navigation
-- Outputs to `docs/` folder
+Then open [http://localhost:8000](http://localhost:8000).
 
-**Dependencies:** `markdown` Python package (auto-installed if missing)
+### 5. Deploy
 
-### 4. Deploy to GitHub Pages
+Commit `docs/` and push to `main`. Enable GitHub Pages: **Settings → Pages → Branch: main / /docs**.
 
-1. Commit the `docs/` folder:
-   ```bash
-   git add docs/
-   git commit -m "Publish updated textbook"
-   git push
-   ```
+## Design
 
-2. Enable GitHub Pages: **Settings → Pages → Branch: main / /docs**
+- Georgia/Times serif, justified text with first-line indent
+- Sticky nav with prev/next chapter buttons
+- CSS reading progress bar (scroll-driven, no JS)
+- Print stylesheet (hides nav and footer)
+- Mobile-responsive
 
-## Book Information
+## Book
 
-- **Title:** Логика (Logic)
-- **Subtitle:** Учебник для средней школы (Textbook for Secondary School)
-- **Authors:** И. Н. Виноградов (I. N. Vinogradov), А. П. Кузьмин (A. P. Kuzmin)
-- **Year:** 1954
-- **Status:** Public domain
-
-## License
-
-Public domain (public достояние in Russian).
-
-## Technical Notes
-
-- The converter uses regex-based chapter detection and text cleaning pipelines
-- Inline footnote markers and page numbers are automatically stripped
-- Soft hyphens and line-break hyphens are joined
-- The HTML output uses embedded CSS with a classic academic design
-- Mobile-responsive layout with Georgia/Times serif fonts
+| | |
+|---|---|
+| Title | Логика (Logic) |
+| Subtitle | Учебник для средней школы |
+| Authors | И. Н. Виноградов, А. П. Кузьмин |
+| Year | 1954 |
+| Status | Public domain |
