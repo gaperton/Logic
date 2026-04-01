@@ -133,6 +133,8 @@ main {
   margin-bottom: 0.75rem;
   font-weight: normal;
   line-height: 1.1;
+  border-bottom: none;
+  padding-bottom: 0;
 }
 
 .book-header .subtitle {
@@ -179,12 +181,12 @@ main {
 
 /* ─── Headings ───────────────────────────────────────────── */
 h1 {
-  font-size: 1.65rem;
+  font-size: 1.5rem;
   color: var(--accent);
-  margin-bottom: 2.5rem;
-  line-height: 1.3;
+  margin-bottom: 2rem;
+  line-height: 1.35;
   font-weight: normal;
-  padding-bottom: 1rem;
+  padding-bottom: 0.85rem;
   border-bottom: 1px solid var(--border);
 }
 
@@ -220,21 +222,22 @@ h1 + p, h2 + p, h3 + p,
 blockquote + p, .book-header p,
 li > p, li > p:first-child { text-indent: 0; }
 
-/* Spacing between paragraph groups */
-p + h3, p + h2 { margin-top: 1rem; }
+/* Center book-header text even though p is justify */
+.book-header p { text-align: center; }
 
 /* ─── Blockquotes ─────────────────────────────────────────── */
 blockquote {
-  margin: 1.75rem 0;
-  padding: 0.75rem 1.5rem;
+  margin: 1.5rem 0;
+  padding: 0.6rem 1.25rem;
   border-left: 2px solid var(--accent);
   color: #555;
   font-style: italic;
   background: rgba(139,26,26,0.03);
   border-radius: 0 2px 2px 0;
+  font-size: 0.95em;
 }
 
-blockquote p { text-indent: 0; margin-bottom: 0.6rem; }
+blockquote p { text-indent: 0; margin-bottom: 0.5rem; }
 blockquote p:last-child { margin-bottom: 0; }
 
 /* ─── Lists ──────────────────────────────────────────────── */
