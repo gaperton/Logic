@@ -225,6 +225,30 @@ li > p, li > p:first-child { text-indent: 0; }
 /* Center book-header text even though p is justify */
 .book-header p { text-align: center; }
 
+.edition-note {
+  margin-top: 1.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.edition-label {
+  font-family: sans-serif;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+}
+
+.edition-editors {
+  font-style: italic;
+  font-size: 0.88rem;
+  color: #999;
+}
+
 /* ─── Blockquotes ─────────────────────────────────────────── */
 blockquote {
   margin: 1.5rem 0;
@@ -342,6 +366,10 @@ INDEX_TEMPLATE = """\
     <h1>{book_title}</h1>
     <p class="subtitle">{book_subtitle}</p>
     <p class="authors">{book_authors}, {book_year}</p>
+    <div class="edition-note">
+      <span class="edition-label">Редактированное издание</span>
+      <span class="edition-editors">ред. В. Балин, Ю. Шелях</span>
+    </div>
   </div>
   <div class="toc">
     <h2>Содержание</h2>
