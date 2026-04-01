@@ -2,6 +2,8 @@
 
 **Логика: Учебник для средней школы** — edited edition of the 1954 textbook by I. N. Vinogradov and A. P. Kuzmin, published as a static website via GitHub Pages.
 
+**→ [gaperton.github.io/Logic](https://gaperton.github.io/Logic)**
+
 The original textbook belongs to the Aristotelian tradition of traditional logic — concepts, judgements, syllogisms, proof — and remains more useful for anyone who wants to reason better in natural language than modern symbolic logic, which assumes premises are already precise. The 1954 text was digitized from PDF, then edited for a modern reader: OCR artifacts corrected, outdated phrasing modernized, and Soviet ideological content replaced with neutral equivalents (e.g. propaganda syllogisms swapped for examples from natural science and everyday life). The logical content of every chapter and exercise is preserved unchanged.
 
 Editors: Vlad Balin ([@gaperton](https://github.com/gaperton)), Yuriy Shelyakh ([@drcha0s](https://github.com/drcha0s))
