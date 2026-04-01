@@ -121,9 +121,8 @@ main {
 /* ─── Book cover (index) ─────────────────────────────────── */
 .book-header {
   text-align: center;
-  padding: 5rem 0 3.5rem;
-  border-bottom: 2px solid var(--border);
-  margin-bottom: 3rem;
+  padding: 4rem 0 2rem;
+  margin-bottom: 2rem;
 }
 
 .book-header h1 {
@@ -151,6 +150,21 @@ main {
 }
 
 /* ─── Table of contents ──────────────────────────────────── */
+.annotation-block {
+  font-size: 0.88rem;
+  color: #888;
+  line-height: 1.65;
+  margin-bottom: 2.5rem;
+}
+
+.annotation-block p {
+  text-indent: 0;
+  text-align: left;
+  margin-bottom: 0.6em;
+}
+
+.annotation-block p:last-child { margin-bottom: 0; }
+
 .toc h2 {
   font-size: 0.72rem;
   text-transform: uppercase;
@@ -226,9 +240,7 @@ li > p, li > p:first-child { text-indent: 0; }
 .book-header p { text-align: center; }
 
 .edition-note {
-  margin-top: 1.75rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--border);
+  margin-top: 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -436,7 +448,11 @@ INDEX_TEMPLATE = """\
       <span class="edition-editors">ред. В. Балин, Ю. Шеляг, 2026</span>
     </div>
   </div>
-  <div class="toc">
+  <div class="annotation-block">
+    <p>Учебник охватывает основные разделы традиционной логики аристотелевской школы: понятие, суждение, умозаключение и доказательство. В отличие от символической логики, которая работает с уже формализованными посылками, традиционная логика учит строить и проверять рассуждение на естественном языке — различать понятия, давать им определения, строить силлогизмы, выявлять и опровергать ошибки в аргументации.</p>
+    <p>Настоящее издание воспроизводит текст учебника И. Н. Виноградова и А. П. Кузьмина 1954 года. Текст адаптирован для современного читателя: исправлены артефакты распознавания, обновлена орфография, идеологически нагруженные примеры заменены нейтральными аналогами при полном сохранении логического содержания.</p>
+  </div>
+  <div class="toc" style="border-top: 2px solid var(--border); padding-top: 2.5rem;">
     <h2>Содержание</h2>
     <ol>
 {toc_items}
