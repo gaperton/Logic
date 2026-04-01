@@ -441,6 +441,63 @@ article + article { break-before: page; }
 }
 
 .cover p { text-align: center; text-indent: 0; }
+
+/* ─── Annotation page ────────────────────────────────────── */
+.annotation {
+  height: calc(297mm - 5cm);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  break-after: page;
+  page-break-after: always;
+  box-sizing: border-box;
+  padding: 1cm 0;
+  font-size: 11pt;
+  line-height: 1.6;
+  color: #333;
+}
+
+.annotation p { text-indent: 0; text-align: justify; margin-bottom: 0.6em; }
+
+/* ─── TOC page ───────────────────────────────────────────── */
+.pdf-toc {
+  break-after: page;
+  page-break-after: always;
+  padding: 1cm 0;
+}
+
+.pdf-toc h2 {
+  font-family: "Georgia", serif;
+  font-size: 18pt;
+  font-weight: normal;
+  color: #8b1a1a;
+  margin-bottom: 1cm;
+  text-transform: none;
+  letter-spacing: normal;
+  border-bottom: 1px solid #d4c9b0;
+  padding-bottom: 0.4cm;
+}
+
+.pdf-toc ol { list-style: none; padding: 0; margin: 0; }
+
+.pdf-toc li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.3em;
+  border-bottom: none;
+  padding: 0.2cm 0;
+  font-size: 11pt;
+  line-height: 1.4;
+}
+
+.pdf-toc li .toc-num {
+  color: #8b1a1a;
+  font-style: italic;
+  flex-shrink: 0;
+  min-width: 2.5cm;
+}
+
+.pdf-toc li .toc-title { color: #1c1a17; }
   </style>
 </head>
 <body>
@@ -464,6 +521,33 @@ article + article { break-before: page; }
   </div>
   <hr class="cover-rule">
 </div>
+
+<div class="annotation">
+  <p>Учебник охватывает основные разделы традиционной логики аристотелевской школы: понятие, суждение, умозаключение и доказательство. В отличие от символической логики, которая работает с уже формализованными посылками, традиционная логика учит строить и проверять рассуждение на естественном языке — различать понятия, давать им определения, строить силлогизмы, выявлять и опровергать ошибки в аргументации.</p>
+  <p>Настоящее издание воспроизводит текст учебника И. Н. Виноградова и А. П. Кузьмина 1954 года, оцифрованного из оригинального PDF. Текст адаптирован для современного читателя: исправлены артефакты распознавания, обновлена орфография, идеологически нагруженные примеры и формулировки заменены нейтральными аналогами при полном сохранении логического содержания всех глав и упражнений.</p>
+  <p><em>Редакторы: В. Балин, Ю. Шелях, 2026.</em></p>
+</div>
+
+<div class="pdf-toc">
+  <h2>Оглавление</h2>
+  <ol>
+    <li><span class="toc-num"></span><span class="toc-title">Предисловие редактора</span></li>
+    <li><span class="toc-num">Глава I.</span><span class="toc-title">ПРЕДМЕТ И ЗАДАЧИ НАУКИ ЛОГИКИ</span></li>
+    <li><span class="toc-num">Глава II.</span><span class="toc-title">ЛОГИЧЕСКИЕ ПРИЁМЫ</span></li>
+    <li><span class="toc-num">Глава III.</span><span class="toc-title">ПОНЯТИЕ</span></li>
+    <li><span class="toc-num">Глава IV.</span><span class="toc-title">ОПРЕДЕЛЕНИЕ И ДЕЛЕНИЕ ПОНЯТИЯ</span></li>
+    <li><span class="toc-num">Глава V.</span><span class="toc-title">СУЖДЕНИЕ</span></li>
+    <li><span class="toc-num">Глава VI.</span><span class="toc-title">ПРЕОБРАЗОВАНИЕ СУЖДЕНИЙ</span></li>
+    <li><span class="toc-num">Глава VII.</span><span class="toc-title">ОСНОВНЫЕ ЗАКОНЫ ЛОГИЧЕСКОГО МЫШЛЕНИЯ</span></li>
+    <li><span class="toc-num">Глава VIII.</span><span class="toc-title">ДЕДУКТИВНЫЕ УМОЗАКЛЮЧЕНИЯ</span></li>
+    <li><span class="toc-num">Глава IX.</span><span class="toc-title">ИНДУКТИВНЫЕ УМОЗАКЛЮЧЕНИЯ</span></li>
+    <li><span class="toc-num">Глава X.</span><span class="toc-title">АНАЛОГИЯ</span></li>
+    <li><span class="toc-num">Глава XI.</span><span class="toc-title">ГИПОТЕЗА</span></li>
+    <li><span class="toc-num">Глава XII.</span><span class="toc-title">ДОКАЗАТЕЛЬСТВО</span></li>
+    <li><span class="toc-num">Приложение.</span><span class="toc-title">ЛОГИЧЕСКИЕ УПРАЖНЕНИЯ</span></li>
+  </ol>
+</div>
+
 <article>
 <h1>Предисловие редактора</h1>
 

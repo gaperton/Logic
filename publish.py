@@ -540,6 +540,63 @@ PRINT_TEMPLATE = """\
 }}
 
 .cover p {{ text-align: center; text-indent: 0; }}
+
+/* ─── Annotation page ────────────────────────────────────── */
+.annotation {{
+  height: calc(297mm - 5cm);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  break-after: page;
+  page-break-after: always;
+  box-sizing: border-box;
+  padding: 1cm 0;
+  font-size: 11pt;
+  line-height: 1.6;
+  color: #333;
+}}
+
+.annotation p {{ text-indent: 0; text-align: justify; margin-bottom: 0.6em; }}
+
+/* ─── TOC page ───────────────────────────────────────────── */
+.pdf-toc {{
+  break-after: page;
+  page-break-after: always;
+  padding: 1cm 0;
+}}
+
+.pdf-toc h2 {{
+  font-family: "Georgia", serif;
+  font-size: 18pt;
+  font-weight: normal;
+  color: #8b1a1a;
+  margin-bottom: 1cm;
+  text-transform: none;
+  letter-spacing: normal;
+  border-bottom: 1px solid #d4c9b0;
+  padding-bottom: 0.4cm;
+}}
+
+.pdf-toc ol {{ list-style: none; padding: 0; margin: 0; }}
+
+.pdf-toc li {{
+  display: flex;
+  align-items: baseline;
+  gap: 0.3em;
+  border-bottom: none;
+  padding: 0.2cm 0;
+  font-size: 11pt;
+  line-height: 1.4;
+}}
+
+.pdf-toc li .toc-num {{
+  color: #8b1a1a;
+  font-style: italic;
+  flex-shrink: 0;
+  min-width: 2.5cm;
+}}
+
+.pdf-toc li .toc-title {{ color: #1c1a17; }}
   </style>
 </head>
 <body>
@@ -563,6 +620,20 @@ PRINT_TEMPLATE = """\
   </div>
   <hr class="cover-rule">
 </div>
+
+<div class="annotation">
+  <p>Учебник охватывает основные разделы традиционной логики аристотелевской школы: понятие, суждение, умозаключение и доказательство. В отличие от символической логики, которая работает с уже формализованными посылками, традиционная логика учит строить и проверять рассуждение на естественном языке — различать понятия, давать им определения, строить силлогизмы, выявлять и опровергать ошибки в аргументации.</p>
+  <p>Настоящее издание воспроизводит текст учебника И. Н. Виноградова и А. П. Кузьмина 1954 года, оцифрованного из оригинального PDF. Текст адаптирован для современного читателя: исправлены артефакты распознавания, обновлена орфография, идеологически нагруженные примеры и формулировки заменены нейтральными аналогами при полном сохранении логического содержания всех глав и упражнений.</p>
+  <p><em>Редакторы: В. Балин, Ю. Шелях, 2026.</em></p>
+</div>
+
+<div class="pdf-toc">
+  <h2>Оглавление</h2>
+  <ol>
+{toc_items}
+  </ol>
+</div>
+
 {chapters}
 </main>
 <footer>{book_authors}, {book_year}. Учебник для средней школы.</footer>
@@ -658,6 +729,13 @@ def build():
         f'<article>\n{markdown2.Markdown(extras=["tables", "fenced-code-blocks", "strike"]).convert(ch["text"])}\n</article>'
         for ch in chapters
     )
+    pdf_toc_items = "\n".join(
+        f'    <li><span class="toc-num">{ch["title"].split(".")[0]}.</span>'
+        f'<span class="toc-title">{".".join(ch["title"].split(".")[1:]).strip()}</span></li>'
+        if "." in ch["title"] else
+        f'    <li><span class="toc-num"></span><span class="toc-title">{ch["title"]}</span></li>'
+        for ch in chapters
+    )
     print_page = PRINT_TEMPLATE.format(
         book_title=BOOK_TITLE,
         book_subtitle=BOOK_SUBTITLE,
@@ -665,6 +743,7 @@ def build():
         book_year=BOOK_YEAR,
         css=CSS,
         chapters=all_chapters_html,
+        toc_items=pdf_toc_items,
         download_btn=DOWNLOAD_BTN,
         github_icon=GITHUB_ICON,
     )
