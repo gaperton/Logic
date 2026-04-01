@@ -3,7 +3,7 @@
   "configurations": [
     {
       "name": "Docs preview",
-      "runtimeExecutable": "python3",
+      "runtimeExecutable": "python",
       "runtimeArgs": ["-m", "http.server", "8000", "--directory", "docs"],
       "port": 8000
     }

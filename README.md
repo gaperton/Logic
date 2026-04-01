@@ -23,7 +23,7 @@ Logic/
 ### 1. Convert PDF to Markdown
 
 ```bash
-python3 convert.py
+python convert.py
 ```
 
 Extracts text via `pdftotext`, detects chapter boundaries, strips page numbers and footnote markers, joins hyphenated line breaks, and outputs one `.md` file per chapter to `chapters/`.
@@ -37,7 +37,7 @@ Review and edit generated files, then place corrected versions in `chapters_huma
 ### 3. Build the site
 
 ```bash
-python3 publish.py
+python publish.py
 ```
 
 Converts Markdown to HTML using `markdown2`, generates navigation, and writes to `docs/`.
@@ -47,7 +47,7 @@ Converts Markdown to HTML using `markdown2`, generates navigation, and writes to
 ### 4. Preview locally
 
 ```bash
-python3 -m http.server 8000 --directory docs
+python -m http.server 8000 --directory docs
 ```
 
 Then open [http://localhost:8000](http://localhost:8000).
