@@ -6,21 +6,24 @@
   <title>Глава VIII. ДЕДУКТИВНЫЕ УМОЗАКЛЮЧЕНИЯ — Логика</title>
   <style>
 :root {
-  --text: #1a1a1a;
+  --text: #1c1a17;
   --bg: #faf8f3;
-  --bg-nav: #2c2c2c;
+  --bg-nav: #1e1c19;
   --accent: #8b1a1a;
   --border: #d4c9b0;
   --link: #5c3317;
-  --max-width: 720px;
+  --muted: #666;
+  --max-width: 740px;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+html { scroll-behavior: smooth; }
+
 body {
   font-family: "Georgia", "Times New Roman", serif;
   font-size: 18px;
-  line-height: 1.75;
+  line-height: 1.85;
   color: var(--text);
   background: var(--bg);
   display: flex;
@@ -28,72 +31,112 @@ body {
   min-height: 100vh;
 }
 
+/* ─── Reading progress bar ───────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  width: 100%;
+  background: var(--accent);
+  transform-origin: 0 50%;
+  scale: 0 1;
+  z-index: 999;
+  animation: reading-progress linear both;
+  animation-timeline: scroll();
+}
+@keyframes reading-progress { to { scale: 1 1; } }
+
+/* ─── Navigation ─────────────────────────────────────────── */
 nav {
   background: var(--bg-nav);
-  padding: 0.75rem 1.5rem;
+  padding: 0 1.25rem;
+  height: 46px;
   display: flex;
   align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
+  gap: 0.5rem;
   position: sticky;
   top: 0;
   z-index: 10;
 }
 
 nav a {
-  color: #e0d8c8;
+  color: #b8b0a0;
   text-decoration: none;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-family: sans-serif;
   white-space: nowrap;
+  padding: 0.3rem 0.6rem;
+  border-radius: 3px;
+  transition: background 0.15s, color 0.15s;
 }
 
-nav a:hover { color: #fff; text-decoration: underline; }
+nav a:hover { color: #fff; background: rgba(255,255,255,0.1); }
 
 nav .spacer { flex: 1; }
 
-nav .chapter-nav { display: flex; gap: 1rem; }
+nav .chapter-nav {
+  display: flex;
+  gap: 0.4rem;
+}
 
+nav .chapter-nav a {
+  border: 1px solid rgba(255,255,255,0.12);
+  max-width: 26ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+nav .chapter-nav a:hover {
+  border-color: rgba(255,255,255,0.3);
+}
+
+/* ─── Main content ─────────────────────────────────────── */
 main {
   flex: 1;
   max-width: var(--max-width);
   width: 100%;
   margin: 0 auto;
-  padding: 3rem 1.5rem 5rem;
+  padding: 3rem 1.5rem 6rem;
 }
 
+/* ─── Book cover (index) ─────────────────────────────────── */
 .book-header {
   text-align: center;
-  padding: 4rem 0 3rem;
+  padding: 5rem 0 3.5rem;
   border-bottom: 2px solid var(--border);
   margin-bottom: 3rem;
 }
 
 .book-header h1 {
-  font-size: 3rem;
+  font-size: 3.5rem;
   color: var(--accent);
-  letter-spacing: 0.05em;
-  margin-bottom: 0.5rem;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.75rem;
+  font-weight: normal;
+  line-height: 1.1;
 }
 
 .book-header .subtitle {
-  font-size: 1.1rem;
-  color: #555;
-  margin-bottom: 0.3rem;
+  font-size: 1rem;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.04em;
 }
 
 .book-header .authors {
   font-style: italic;
-  color: #777;
-  font-size: 0.95rem;
+  color: #999;
+  font-size: 0.88rem;
 }
 
+/* ─── Table of contents ──────────────────────────────────── */
 .toc h2 {
-  font-size: 1.2rem;
+  font-size: 0.72rem;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: #666;
-  margin-bottom: 1.5rem;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  margin-bottom: 1.25rem;
   font-family: sans-serif;
   font-weight: 400;
 }
@@ -104,49 +147,92 @@ main {
 
 .toc li a {
   display: block;
-  padding: 0.75rem 0;
+  padding: 0.65rem 0;
   color: var(--link);
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 0.95rem;
+  transition: color 0.15s, padding-left 0.15s;
 }
 
 .toc li a:hover {
   color: var(--accent);
-  padding-left: 0.5rem;
-  transition: padding 0.15s;
+  padding-left: 0.4rem;
 }
 
-h1 { font-size: 1.8rem; color: var(--accent); margin-bottom: 2rem; line-height: 1.3; }
+/* ─── Headings ───────────────────────────────────────────── */
+h1 {
+  font-size: 1.65rem;
+  color: var(--accent);
+  margin-bottom: 2.5rem;
+  line-height: 1.3;
+  font-weight: normal;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
 
-h2 { font-size: 1.35rem; margin: 2.5rem 0 1rem; }
+h2 {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  font-weight: 400;
+  font-family: sans-serif;
+  margin: 3rem 0 1.5rem;
+}
 
 h3 {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-style: italic;
   font-weight: normal;
-  margin: 2rem 0 0.75rem;
-  color: #333;
+  margin: 2.5rem 0 0.75rem;
+  color: var(--accent);
 }
 
-p { margin-bottom: 1.1rem; text-align: justify; }
+/* ─── Body text ──────────────────────────────────────────── */
+p {
+  margin-bottom: 0;
+  text-align: justify;
+  text-indent: 1.5em;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
 
+/* No indent after headings and certain elements */
+h1 + p, h2 + p, h3 + p,
+blockquote + p, .book-header p,
+li > p, li > p:first-child { text-indent: 0; }
+
+/* Spacing between paragraph groups */
+p + h3, p + h2 { margin-top: 1rem; }
+
+/* ─── Blockquotes ─────────────────────────────────────────── */
 blockquote {
-  border-left: 3px solid var(--border);
-  margin: 1.5rem 0;
-  padding: 0.5rem 1.25rem;
-  color: #444;
+  margin: 1.75rem 0;
+  padding: 0.75rem 1.5rem;
+  border-left: 2px solid var(--accent);
+  color: #555;
   font-style: italic;
+  background: rgba(139,26,26,0.03);
+  border-radius: 0 2px 2px 0;
 }
 
-img { max-width: 100%; display: block; margin: 1.5rem auto; }
+blockquote p { text-indent: 0; margin-bottom: 0.6rem; }
+blockquote p:last-child { margin-bottom: 0; }
 
-strong { color: #111; }
+/* ─── Lists ──────────────────────────────────────────────── */
+ol, ul { padding-left: 1.75rem; margin: 1rem 0; }
+li { margin-bottom: 0.4rem; }
+li p { text-indent: 0; margin-bottom: 0.3rem; }
 
+/* ─── Images ─────────────────────────────────────────────── */
+img { max-width: 100%; display: block; margin: 2rem auto; }
+
+/* ─── Tables ─────────────────────────────────────────────── */
 table {
   width: 100%;
   border-collapse: collapse;
-  margin: 1.5rem 0;
-  font-size: 0.95rem;
+  margin: 1.75rem 0;
+  font-size: 0.92rem;
 }
 
 th, td {
@@ -155,21 +241,37 @@ th, td {
   text-align: left;
 }
 
-th { background: #ede8dc; }
+th {
+  background: rgba(212,201,176,0.35);
+  font-weight: normal;
+  font-style: italic;
+}
 
+/* ─── Footer ─────────────────────────────────────────────── */
 footer {
   text-align: center;
   padding: 1.5rem;
-  font-size: 0.8rem;
-  color: #888;
+  font-size: 0.78rem;
+  color: #aaa;
   font-family: sans-serif;
   border-top: 1px solid var(--border);
 }
 
+/* ─── Mobile ─────────────────────────────────────────────── */
 @media (max-width: 600px) {
   body { font-size: 16px; }
-  .book-header h1 { font-size: 2.2rem; }
-  main { padding: 2rem 1rem 4rem; }
+  .book-header h1 { font-size: 2.5rem; }
+  main { padding: 2rem 1.25rem 4rem; }
+  nav { height: auto; padding: 0.5rem 1rem; flex-wrap: wrap; }
+  nav .chapter-nav a { max-width: 18ch; }
+}
+
+/* ─── Print ──────────────────────────────────────────────── */
+@media print {
+  nav, footer, body::before { display: none; }
+  main { padding: 0; }
+  h1 { color: #000; border: none; }
+  a { color: #000; text-decoration: none; }
 }
 </style>
 </head>
