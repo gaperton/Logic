@@ -653,6 +653,12 @@ def extract_title(md_text: str) -> str:
 
 
 def build():
+    # Preserve existing PDF before wiping the output directory
+    old_pdf = None
+    old_pdf_path = SITE_DIR / "logika.pdf"
+    if old_pdf_path.exists():
+        old_pdf = old_pdf_path.read_bytes()
+
     if SITE_DIR.exists():
         shutil.rmtree(SITE_DIR)
     SITE_DIR.mkdir()
@@ -756,7 +762,13 @@ def build():
     # Generate PDF using Playwright
     print("\nGenerating PDF...")
     try:
-        from playwright.sync_api import sync_playwright
+        try:
+            from playwright.sync_api import sync_playwright
+        except ImportError:
+            print("  Installing playwright...")
+            subprocess.check_call([sys.executable, "-m", "pip", "install", "playwright", "-q"])
+            subprocess.check_call([sys.executable, "-m", "playwright", "install", "chromium"])
+            from playwright.sync_api import sync_playwright
         print_html_path = (SITE_DIR / "print.html").resolve()
         pdf_path = SITE_DIR / "logika.pdf"
         with sync_playwright() as p:
@@ -773,6 +785,11 @@ def build():
         print(f"  logika.pdf ({pdf_path.stat().st_size // 1024} KB)")
     except Exception as e:
         print(f"  PDF generation failed: {e}")
+        if old_pdf:
+            (SITE_DIR / "logika.pdf").write_bytes(old_pdf)
+            print("  Restored previous logika.pdf")
+        else:
+            print("  Install Playwright to generate PDF: pip install playwright && python -m playwright install chromium")
 
     print(f"\nBuilt {len(chapters)} chapters → {SITE_DIR}/")
     print(f"Preview: open {SITE_DIR / 'index.html'}")
