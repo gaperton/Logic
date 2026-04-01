@@ -1,6 +1,10 @@
 # Logic
 
-**Логика: Учебник для средней школы** (1954) — public domain textbook by I. N. Vinogradov and A. P. Kuzmin, digitized and published as a static website via GitHub Pages.
+**Логика: Учебник для средней школы** — edited edition of the 1954 textbook by I. N. Vinogradov and A. P. Kuzmin, published as a static website via GitHub Pages.
+
+The original textbook belongs to the Aristotelian tradition of traditional logic — concepts, judgements, syllogisms, proof — and remains more useful for anyone who wants to reason better in natural language than modern symbolic logic, which assumes premises are already precise. The 1954 text was digitized from PDF, then edited for a modern reader: OCR artifacts corrected, outdated phrasing modernized, and Soviet ideological content replaced with neutral equivalents (e.g. propaganda syllogisms swapped for examples from natural science and everyday life). The logical content of every chapter and exercise is preserved unchanged.
+
+Editors: Vlad Balin ([@gaperton](https://github.com/gaperton)), Yuriy Shelyakh ([@drcha0s](https://github.com/drcha0s))
 
 ## Project Structure
 
@@ -68,4 +72,5 @@ Commit `docs/` and push to `main`. Enable GitHub Pages: **Settings → Pages →
 | Subtitle | Учебник для средней школы |
 | Authors | И. Н. Виноградов, А. П. Кузьмин |
 | Year | 1954 |
-| Status | Public domain |
+| Status | Public domain (original text) |
+| Editorial materials | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
