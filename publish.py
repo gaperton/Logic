@@ -251,7 +251,7 @@ INDEX_TEMPLATE = """\
 
 
 def get_chapter_files():
-    return sorted(SOURCE_DIR.glob("[0-9][0-9]_glava_*.md"))
+    return sorted(SOURCE_DIR.glob("[0-9][0-9]_*.md"))
 
 
 def extract_title(md_text: str) -> str:
